@@ -28,7 +28,9 @@ noble.on('discover', function(peripheral) {
 			lastOurSignal = peripheral.rssi;
 			closest_beacon = peripheral.address
 			console.log("Chosen device: " + peripheral.address);
-		}
+		}else if(closest_beacon == peripheral.address){
+            lastOurSignal = peripheral.rssi;
+        }
 	}
 });
 
