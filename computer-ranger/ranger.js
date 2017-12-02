@@ -13,7 +13,7 @@ const ourBeaconsFriendlyNames = {
 }
 
 let lastOurSignal = -256;
-let closest_beacon = null;
+let closest_beacon = "test";
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
