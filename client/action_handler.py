@@ -9,7 +9,6 @@ class ActionHandler:
 
     def handle_event(self, json_string):
         json_dict = json.loads(json_string)
-        print(json_dict)
         if json_dict["type"] == "EV_REL":
             self.handle_mouse_event(json_dict["payload"])
         elif json_dict["type"] == "EV_KEY":
