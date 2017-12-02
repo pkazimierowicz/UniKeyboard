@@ -4,15 +4,17 @@ module.export = (callback) => {
   const reader = new EvdevReader();
 
   reader.on("EV_KEY",function(data){
-    callback({
+    let payload = {
       type: "EV_KEY",
       payload: data
-    });
+    };
+    callback(payload);
   }).on("EV_REL",function(data){
-    callback({
+    let payload = {
       type: "EV_REL",
       payload: data
-    });
+    };
+    callback(payload);
   }).on("error",function(e){
     console.log("reader error : ",e);
   })
