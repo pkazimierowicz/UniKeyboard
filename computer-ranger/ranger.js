@@ -20,8 +20,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
-	if(peripheral.rssi > -30)
-    console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.address);
+    console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
   if (!includes(ourBeaconsADDRs,peripheral.address)) {return}
 	else {
 		if (peripheral.rssi > lastOurSignal){
