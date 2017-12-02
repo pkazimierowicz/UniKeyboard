@@ -4,16 +4,18 @@ const noble = require('noble');
 const includes = require('lodash.includes');
 const ourBeacons = [ "D0D3FA86CA7645EC9BD96AF43D4688EC", "D0D3FA86CA7645EC9BD96AF4BD825E79", "D0D3FA86CA7645EC9BD96AF4A17D1214", "D0D3FA86CA7645EC9BD96AF48B479BA7" ];
 const ourBeaconsUUIDs = ["d41f474e5a80", "c945e42f7c7a", "fc75731cb160", "ce019d3a8064"];
-const ourBeaconsADDRs = ["d4:88:47:76:be:80", "fc:2d:f1:c6:b8:60", "c9:5a:42:e5:6e:7a", "ce:49:7c:fe:6d:64"];
+const ourBeaconsADDRs = ["d4:88:47:76:be:80", "fc:2d:f1:c6:b8:60", "c9:5a:42:e5:6e:7a", "ce:49:7c:fe:6d:64", "ce:9f:99:12:ac:64", "c9:14:db:23:ff:7a"];
 const ourBeaconsFriendlyNames = {
     "d4:88:47:76:be:80" : "Paweł",
     "fc:2d:f1:c6:b8:60" : "Kacper",
     "c9:5a:42:e5:6e:7a" : "Bartek",
-    "ce:49:7c:fe:6d:64" : "Kuba"
+    "ce:49:7c:fe:6d:64" : "Kuba",
+    "c9:14:db:23:ff:7a" : "Bartek Mac",
+    "ce:9f:99:12:ac:64" : "Bartek Windows"
 }
 
 let lastOurSignal = -256;
-let closest_beacon = null;
+let closest_beacon = "test";
 let lastTimeChangedDevice = Date.now();
 
 noble.on('stateChange', function(state) {
