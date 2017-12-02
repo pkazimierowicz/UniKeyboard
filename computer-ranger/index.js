@@ -9,9 +9,9 @@ noble.on('stateChange', function(state) {
   else {
     noble.stopScanning();
   }
-})
+});
 
 noble.on('discover', function(peripheral) {
     noble.stopScanning();
     console.log('found peripheral:', peripheral.advertisement);
-}
+});
