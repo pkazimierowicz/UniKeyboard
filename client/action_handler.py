@@ -24,13 +24,13 @@ class ActionHandler:
         pass
 
     @staticmethod
-    def handle_event(json):
-        dict = json.loads(json)
-        if dict["type"] == "EV_REL":
-            ActionHandler.handle_mouse_event(dict["payload"])
-        elif dict["type"] == "EV_KEY":
-            if ActionHandler.mouse_button_for_key(dict["payload"]["code"]) is not None:
-                ActionHandler.handle_mouse_event(dict["payload"])
+    def handle_event(json_string):
+        json_dict = json.loads(json_string)
+        if json_dict["type"] == "EV_REL":
+            ActionHandler.handle_mouse_event(json_dict["payload"])
+        elif json_dict["type"] == "EV_KEY":
+            if ActionHandler.mouse_button_for_key(json_dict["payload"]["code"]) is not None:
+                ActionHandler.handle_mouse_event(json_dict["payload"])
         else:
             pass
 
