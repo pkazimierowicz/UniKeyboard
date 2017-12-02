@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "noble": "^1.8.1"
+    "evdev": "^0.2.4",
+    "noble": "^1.8.1",
+    "sodium": "^2.0.3"
   }
 }
