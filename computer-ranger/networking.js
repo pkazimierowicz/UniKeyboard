@@ -11,6 +11,7 @@ module.exports = {
     });
 
     server.on('message', (msg, rinfo) => {
+      msg = msg.toString()
       beacon_mappings[msg] = rinfo.address;
     });
 
@@ -32,7 +33,6 @@ module.exports = {
       return;
     }
 
-    console.log(`Sending ${message} to ${HOST}:${PORT}`);
     client.send(message, 0, message.length, PORT, HOST, function(err, bytes) {
         if (err) throw err;
         client.close();
