@@ -27,10 +27,12 @@ noble.on('discover', function(peripheral) {
 		if (peripheral.rssi > lastOurSignal){
 			lastOurSignal = peripheral.rssi;
 			closest_beacon = peripheral.address
-			console.log("Chosen device: " + peripheral.address);
+			console.log("Chosen device: " + peripheral.address, peripheral.rssi);
 		}else if(closest_beacon == peripheral.address){
-            lastOurSignal = peripheral.rssi;
-        }
+      lastOurSignal = peripheral.rssi;
+			console.log(peripheral.rssi)
+    }
+		console.log("I see: ", peripheral.address, peripheral.rssi);
 	}
 });
 
