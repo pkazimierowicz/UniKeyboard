@@ -11,6 +11,7 @@ module.exports = {
     });
 
     server.on('message', (msg, rinfo) => {
+      msg = msg.toString()
       beacon_mappings[msg] = rinfo.address;
     });
 
