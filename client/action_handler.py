@@ -1,32 +1,47 @@
-# from pynput.keyboard import Key, Controller
-# from pynput.mouse import Button, Controller
 import pynput
+import json
+from enum import Enum
 
 class ActionHandler:
     @staticmethod
-    def handleMouseEvent(event_dict):
-        # mouse = pynput.mouse.Controller()
-        # mouse.position = event_dict["position"]
-        # if event_dict["press"]:
-        #     if event_dict["press"] == "left":
-        #         mouse.press(pynput.mouse.Button.left)
-        #     else if event_dict["press"] == "right":
-        #         mouse.press(pynput.mouse.Button.right)
-        #     else if event_dict["press"] == "middle":
-        #         mouse.press(pynput.mouse.Button.middle)
-        # if event_dict["release"]:
-        #     if event_dict["release"] == "left":
-        #         mouse.press(pynput.mouse.Button.left)
-        #     else if event_dict["release"] == "right":
-        #         mouse.press(pynput.mouse.Button.right)
-        #     else if event_dict["release"] == "middle":
-        #         mouse.press(pynput.mouse.Button.middle)
-        # if event_dict["scroll"]:
-        #     mouse.scroll = event_dict["scroll"]
-        pass
-    
+    def handle_mouse_event(event_dict):
+        mouse = pynput.mouse.Controller()
+        if ActionHandler.mouse_button_for_key(event_dict["code"]) is not None:
+            if event_dict["value"] == 1:
+                mouse.press(ActionHandler.mouse_button_for_key(event_dict["code"]))
+            else:
+                mouse.release(ActionHandler.mouse_button_for_key(event_dict["code"]))
+        elif event_dict["code"] == 8:
+            mouse.scroll(0, event_dict["value"])
+            pass
+        elif event_dict["code"] == 0:
+            mouse.move(event_dict["value"],0)
+        elif event_dict["code"] == 1:
+            mouse.move(0,event_dict["value"])
+
     @staticmethod
-    def handleKeyboardEvent(event_dict):
+    def handle_keyboard_event(event_dict):
         pass
-       
+
+    @staticmethod
+    def handle_event(json):
+        dict = json.loads(json)
+        if dict["type"] == "EV_REL":
+            ActionHandler.handle_mouse_event(dict["payload"])
+        elif dict["type"] == "EV_KEY":
+            if ActionHandler.mouse_button_for_key(dict["payload"]["code"]) is not None:
+                ActionHandler.handle_mouse_event(dict["payload"])
+        else:
+            pass
+
+    @staticmethod
+    def mouse_button_for_key(key):
+        if key == "BTN_RIGHT":
+            return pynput.mouse.Button.right
+        elif key == "BTN_LEFT":
+            return pynput.mouse.Button.left
+        elif key == "BTN_MIDDLE":
+            return pynput.mouse.Button.middle
+        else:
+            return None
         
