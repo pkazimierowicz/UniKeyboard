@@ -20,4 +20,4 @@ noble.on('discover', function(peripheral) {
     console.log('found peripheral:', peripheral);
 });
 
-module.export = () => { return closest_beacon; };
+module.exports = () => { return closest_beacon; };

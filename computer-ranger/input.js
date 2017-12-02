@@ -2,7 +2,7 @@
 
 const EvdevReader = require("evdev");
 
-module.export = (callback) => {
+module.exports = (callback) => {
   const reader = new EvdevReader();
 
   reader.on("EV_KEY",function(data){
