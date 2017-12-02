@@ -6,7 +6,7 @@ class ActionHandler:
     @staticmethod
     def handle_mouse_event(event_dict):
         mouse = pynput.mouse.Controller()
-        if ActionHandler.mouse_button_for_key(event_dict["code"] not None:
+        if ActionHandler.mouse_button_for_key(event_dict["code"]) not None:
             if event_dict["value"] == 1:
                 mouse.press(ActionHandler.mouse_button_for_key(event_dict["code"]))
             else:
@@ -29,8 +29,8 @@ class ActionHandler:
         if dict["type"] == "EV_REL":
             ActionHandler.handleMouseEvent(dict["payload"])
         else if dict["type"] == "EV_KEY":
-            if dict["payload"]["code"] == "BTN_RIGHT" or dict["payload"]["code"] == "BTN_LEFT" or dict["payload"]["code"] == "BTN_MIDDLE" :
-                ActionHandler.handle_mouse_button_event(dict["payload"])
+            if ActionHandler.mouse_button_for_key(dict["payload"]["code"]) not None:
+                ActionHandler.handle_mouse_event(dict["payload"])
         else:
             pass
 
