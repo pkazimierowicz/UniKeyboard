@@ -20,7 +20,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
-    console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
+  //console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
   if (!includes(ourBeaconsADDRs,peripheral.address)) {return}
 	else {
 		if (peripheral.rssi > lastOurSignal){
@@ -28,7 +28,7 @@ noble.on('discover', function(peripheral) {
 			closest_beacon = peripheral.address
 			console.log("Chosen device: " + peripheral.address, peripheral.rssi);
 		}else if(closest_beacon == peripheral.address){
-      lastOurSignal = peripheral.rssi;
+            lastOurSignal = peripheral.rssi;
 			console.log(peripheral.rssi)
     }
 		console.log("I see: ", peripheral.address, peripheral.rssi);
