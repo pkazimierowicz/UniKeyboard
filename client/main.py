@@ -3,14 +3,12 @@ import time
 import threading
 import socket
 import sys
+from action_handler import ActionHandler
 
 class MyUDPHandler(socketserver.BaseRequestHandler):
   def handle(self):
     data = self.request[0].strip()
-    sock = self.request[1]
-    print("{} wrote:".format(self.client_address[0]))
-    print(data)
-    sock.sendto(data.upper(), self.client_address)
+    ActionHandler.handle_event(data)
 
 def spam():
   cs = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
