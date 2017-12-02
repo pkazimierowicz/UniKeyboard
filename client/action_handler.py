@@ -14,7 +14,7 @@ class ActionHandler:
             if self.mouse_button_for_key(json_dict["payload"]["code"]) is not None:
                 self.handle_mouse_event(json_dict["payload"])
         else:
-            pass
+            self.handle_keyboard_event(json_dict["payload"])
 
     def handle_mouse_event(self, event_dict):
         if self.mouse_button_for_key(event_dict["code"]) is not None:
@@ -33,7 +33,7 @@ class ActionHandler:
         if self.keyboard_button(event_dict["code"]) is not None:
            if event_dict["value"] == 1:
                 self.keyboard.press(self.keyboard_button(event_dict["code"]))
-            else:
+           else:
                 self.keyboard.release(self.keyboard_button(event_dict["code"]))
         
                 
