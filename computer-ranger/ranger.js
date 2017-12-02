@@ -28,7 +28,7 @@ noble.on('stateChange', function(state) {
 noble.on('discover', function(peripheral) {
   //console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
   if (!includes(ourBeaconsADDRs, peripheral.address)) {
-    if(peripheral.rssi > -50)
+    if(peripheral.rssi > -30)
         console.log("Unknow:", peripheral.address);
   } else {
     if (peripheral.rssi > lastOurSignal){
