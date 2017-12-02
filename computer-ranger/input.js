@@ -1,3 +1,5 @@
+"use strict";
+
 const EvdevReader = require("evdev");
 
 module.export = (callback) => {

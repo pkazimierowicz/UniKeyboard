@@ -1,6 +1,8 @@
+"use strict";
+
 const networking = require("./networking");
 const input = require("./input");
-const ranger = require("./.ranger");
+const ranger = require("./ranger");
 
 networking.server()
 
