@@ -25,6 +25,6 @@ if __name__ == "__main__":
     print("Missing Beacon ID parameter!")
     sys.exit(1)
   threading.Thread(target=spam).start()
-  HOST, PORT = "127.0.0.1", 41235
+  HOST, PORT = "0.0.0.0", 41235
   with socketserver.UDPServer((HOST, PORT), MyUDPHandler) as server:
     server.serve_forever()
