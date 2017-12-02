@@ -2,6 +2,7 @@
 
 const EvdevReader = require("evdev");
 const groupby = require("lodash.groupby");
+const values = require("lodash.values");
 
 module.exports = (callback) => {
   let ev_rel = [];
@@ -9,7 +10,7 @@ module.exports = (callback) => {
   setInterval(() => {
     let groups = groupby(ev_rel, (v) => v["code"]);
     ev_rel = [];
-    let reduced = Object.values(groups).map((g) => g.reduce((acc, v) => {
+    let reduced = values(groups).map((g) => g.reduce((acc, v) => {
       if(!acc) return v;
       acc.value += v.value;
       return acc;
