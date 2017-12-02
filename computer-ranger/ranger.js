@@ -26,21 +26,23 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
-  noble.stopScanning();
   //console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
   if (!includes(ourBeaconsADDRs,peripheral.address)) {return}
-	else {
-		if (peripheral.rssi > lastOurSignal){
-			lastOurSignal = peripheral.rssi;
-			closest_beacon = peripheral.address
-			console.log("Chosen device: " + peripheral.address, peripheral.rssi);
-		}else if(closest_beacon == peripheral.address){
-            lastOurSignal = peripheral.rssi;
-			console.log(peripheral.rssi)
+  else {
+    if (peripheral.rssi > lastOurSignal){
+
+      lastOurSignal = peripheral.rssi;
+      closest_beacon = peripheral.address;
+  	  console.log("Chosen device: ", peripheral.address, peripheral.rssi);
+
+    } else if(closest_beacon == peripheral.address){
+
+      lastOurSignal = peripheral.rssi;
+  	  console.log("Already chosen:", peripheral.rssi)
+
     }
-		console.log("I see: ", peripheral.address, ourBeaconsFriendlyNames[peripheral.address], peripheral.rssi);
-	}
-  noble.startScanning([], true);
+    console.log("I see: ", peripheral.address, ourBeaconsFriendlyNames[peripheral.address], peripheral.rssi);
+  }
 });
 
 module.exports = () => { return closest_beacon; };
