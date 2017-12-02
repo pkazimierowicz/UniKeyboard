@@ -27,7 +27,7 @@ class ActionHandler:
     def handle_event(json):
         dict = json.loads(json)
         if dict["type"] == "EV_REL":
-            ActionHandler.handleMouseEvent(dict["payload"])
+            ActionHandler.handle_mouse_event(dict["payload"])
         else if dict["type"] == "EV_KEY":
             if ActionHandler.mouse_button_for_key(dict["payload"]["code"]) not None:
                 ActionHandler.handle_mouse_event(dict["payload"])
