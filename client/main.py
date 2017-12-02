@@ -5,10 +5,12 @@ import socket
 import sys
 from action_handler import ActionHandler
 
+ac = ActionHandler()
+
 class MyUDPHandler(socketserver.BaseRequestHandler):
   def handle(self):
     data = self.request[0].strip()
-    ActionHandler.handle_event(data)
+    ac.handle_event(data)
 
 def spam():
   cs = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
