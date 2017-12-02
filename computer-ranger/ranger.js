@@ -26,6 +26,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
+  noble.stopScanning();
   //console.log(peripheral.uuid, includes(ourBeaconsUUIDs, peripheral.uuid), peripheral.serviceUuids);
   if (!includes(ourBeaconsADDRs,peripheral.address)) {return}
 	else {
@@ -39,6 +40,7 @@ noble.on('discover', function(peripheral) {
     }
 		console.log("I see: ", peripheral.address, ourBeaconsFriendlyNames[peripheral.address], peripheral.rssi);
 	}
+  noble.startScanning([], true);
 });
 
 module.exports = () => { return closest_beacon; };
