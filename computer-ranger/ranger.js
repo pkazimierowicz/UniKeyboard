@@ -14,6 +14,7 @@ const ourBeaconsFriendlyNames = {
 
 let lastOurSignal = -256;
 let closest_beacon = null;
+let lastTimeChangedDevice = Date.now();
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
@@ -31,16 +32,17 @@ noble.on('discover', function(peripheral) {
     if(peripheral.rssi > -30)
         console.log("Unknow:", peripheral.address);
   } else {
-    if (peripheral.rssi > lastOurSignal){
+    if (peripheral.rssi > lastOurSignal && lastTimeChangedDevice + 3000 <  Date.now()){
 
       lastOurSignal = peripheral.rssi;
       closest_beacon = peripheral.address;
   	  console.log("Chosen device: ", peripheral.address, peripheral.rssi);
+      lastTimeChangedDevice = Date.now();
 
     } else if(closest_beacon == peripheral.address){
 
       lastOurSignal = peripheral.rssi;
-  	  console.log("Already chosen:", peripheral.rssi)
+  	  console.log("Already chosen:", peripheral.rssi);
 
     }
     console.log("I see: ", peripheral.address, ourBeaconsFriendlyNames[peripheral.address], peripheral.rssi);
