@@ -1,4 +1,6 @@
-const server = require("./networking");
-server((beaconid, address) => {
-  console.log(`${address} has beacon id ${beaconid}`);
-});
+const networking = require("./networking");
+networking.server();
+
+setInterval(() => {
+  networking.sendto("asd", "HEJ!");
+}, 1000);
