@@ -1,17 +1,10 @@
-var noble = require('noble');
+"use strict";
 
+const networking = require("./networking");
+const input = require("./input");
+const ranger = require("./ranger");
 
-noble.on('stateChange', function(state) {
-  if (state === 'poweredOn') {
-    console.log('scanning...');
-    noble.startScanning([], true);
-  }
-  else {
-    noble.stopScanning();
-  }
-});
-
-noble.on('discover', function(peripheral) {
-    //noble.stopScanning();
-    console.log('found peripheral:', peripheral.advertisement);
+networking.server()
+input((payload) => {
+  networking.sendto(ranger(), JSON.stringify(payload));
 });
