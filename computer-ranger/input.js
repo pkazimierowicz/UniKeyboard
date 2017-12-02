@@ -22,7 +22,7 @@ module.exports = (callback) => {
       };
       callback(payload);
     });
-  }, 15);
+  }, 10);
 
   const reader = new EvdevReader();
 
