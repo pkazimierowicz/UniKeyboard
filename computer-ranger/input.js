@@ -1,8 +1,29 @@
 "use strict";
 
 const EvdevReader = require("evdev");
+const groupby = require("lodash.groupby");
+const values = require("lodash.values");
 
 module.exports = (callback) => {
+  let ev_rel = [];
+
+  setInterval(() => {
+    let groups = groupby(ev_rel, (v) => v["code"]);
+    ev_rel = [];
+    let reduced = values(groups).map((g) => g.reduce((acc, v) => {
+      if(!acc) return v;
+      acc.value += v.value;
+      return acc;
+    }, null));
+    reduced.forEach((data) => {
+      let payload = {
+        type: "EV_REL",
+        payload: data
+      };
+      callback(payload);
+    });
+  }, 15);
+
   const reader = new EvdevReader();
 
   reader.on("EV_KEY",function(data){
@@ -12,11 +33,7 @@ module.exports = (callback) => {
     };
     callback(payload);
   }).on("EV_REL",function(data){
-    let payload = {
-      type: "EV_REL",
-      payload: data
-    };
-    callback(payload);
+    ev_rel.push(data);
   }).on("error",function(e){
     console.log("reader error : ",e);
   })
